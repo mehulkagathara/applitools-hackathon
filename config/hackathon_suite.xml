@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="AppliTools-Hackathon" verbose="0">
+	<test name="TraditionalTests - Version 1" enabled="true">
+		<parameter name="env.resources" value="resources/env1" />
+		<classes>
+			<class name="com.applitools.hackathon.tests.TraditionalTests"></class>
+		</classes>
+	</test>
+	<test name="TraditionalTests - Version 2" enabled="false">
+		<parameter name="env.resources" value="resources/env2" />
+		<classes>
+			<class name="com.applitools.hackathon.tests.TraditionalTests"></class>
+		</classes>
+	</test>
+</suite>
