@@ -10,8 +10,10 @@ import com.applitools.eyes.selenium.Eyes;
 import com.qmetry.qaf.automation.core.ConfigurationManager;
 
 public class EyesListener implements ITestListener {
+	
 	@Override
 	public void onTestStart(ITestResult result) {
+		
 		ConfigurationManager.getBundle().setProperty("test_name", result.getMethod().getMethodName());
 	}
 

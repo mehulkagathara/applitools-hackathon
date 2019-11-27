@@ -2,7 +2,7 @@
 <suite name="AppliTools-Hackathon" verbose="0">
 	<listeners>
 		<listener
-			class-name="com.applitools.hackathon.base.EyesListener" />
+			class-name="com.applitools.hackathon.util.EyesListener" />
 	</listeners>
 	<test name="TraditionalTests - Version 1" enabled="false">
 		<parameter name="env.resources" value="resources/env1" />

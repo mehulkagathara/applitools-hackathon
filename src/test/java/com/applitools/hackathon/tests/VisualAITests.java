@@ -42,18 +42,15 @@ public class VisualAITests extends WebDriverTestCase {
 	 * you in.
 	 */
 	@QAFDataProvider(dataFile = "resources/data/login.xml", key = "login.data")
-	@Test(enabled = false, priority = 2)
+	@Test(enabled = true, priority = 2)
 	public void dataDrivenLoginTest(Map<String, String> testData) {
 		LoginPage loginPage = new LoginPage();
 		loginPage.launchPage(null);
 
 		loginPage.doLogin(testData.get("username"), testData.get("password"));
 
-		if (testData.get("isValid").equalsIgnoreCase("invalid")) {// invalid check
-			Validator.verifyThat(loginPage.getAlertMessage().getText(), Matchers.equalTo(testData.get("message")));
-		} else {// valid check
-			new TransactionPage().getShowExpensesChart().verifyPresent();
-		}
+		EyesManager eyesManager = new EyesManager();
+		eyesManager.checkWindow(getDriver(),testData.get("recId"));
 	}
 
 	/*

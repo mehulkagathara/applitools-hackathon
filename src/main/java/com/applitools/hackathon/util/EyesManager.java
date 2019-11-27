@@ -16,9 +16,13 @@ public class EyesManager {
 		this.eyes = (Eyes) ConfigurationManager.getBundle().getObject("Eyes");
 	}
 
-	public void checkWindow(QAFWebDriver driver) {
+	public void checkWindow(QAFWebDriver driver, String... testSufix) {
 		if (!eyes.getIsOpen()) {
-			eyes.open(driver, appName, ConfigurationManager.getBundle().getString("test_name"));
+			if (testSufix.length > 0) {
+				eyes.open(driver, appName, ConfigurationManager.getBundle().getString("test_name") + (String) testSufix[0]);
+			} else {
+				eyes.open(driver, appName, ConfigurationManager.getBundle().getString("test_name"));
+			}
 			eyes.checkWindow();
 			eyes.close();
 		}
