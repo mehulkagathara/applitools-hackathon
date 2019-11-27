@@ -1,5 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="AppliTools-Hackathon" verbose="0">
+	<listeners>
+		<listener
+			class-name="com.applitools.hackathon.base.EyesListener" />
+	</listeners>
 	<test name="TraditionalTests - Version 1" enabled="false">
 		<parameter name="env.resources" value="resources/env1" />
 		<classes>

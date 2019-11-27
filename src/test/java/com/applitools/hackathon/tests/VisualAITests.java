@@ -5,11 +5,10 @@ import java.util.Map;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
-import com.applitools.eyes.BatchInfo;
-import com.applitools.eyes.selenium.Eyes;
 import com.applitools.hackathon.pages.ExpensesPage;
 import com.applitools.hackathon.pages.LoginPage;
 import com.applitools.hackathon.pages.TransactionPage;
+import com.applitools.hackathon.util.EyesManager;
 import com.qmetry.qaf.automation.core.ConfigurationManager;
 import com.qmetry.qaf.automation.testng.dataprovider.QAFDataProvider;
 import com.qmetry.qaf.automation.ui.WebDriverTestCase;
@@ -20,7 +19,6 @@ import com.qmetry.qaf.automation.util.Validator;
  * Company: Infostretch
  */
 public class VisualAITests extends WebDriverTestCase {
-	private Eyes eyes;
 	/*
 	 * Open the login page and write assertions to ensure everything looks OK on
 	 * that page. i.e. add assertions to ensure all the fields, labels and all other
@@ -30,13 +28,8 @@ public class VisualAITests extends WebDriverTestCase {
 	public void loginUIValidationTest() {
 		LoginPage loginPage = new LoginPage();
 		loginPage.launchPage(null);
-		
-		eyes = new Eyes();
-		eyes.setBatch(new BatchInfo("Hackathon"));
-		eyes.setApiKey(ConfigurationManager.getBundle().getString("applitools.api.key"));
-		eyes.open(getDriver(), "ACME Demo App", "LoginUIValidationTest");
-		eyes.checkWindow();
-		eyes.close();
+		EyesManager eyesManager = new EyesManager();
+		eyesManager.checkWindow(getDriver());
 	}
 
 	/*
