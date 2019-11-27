@@ -2,9 +2,9 @@ package com.applitools.hackathon.tests;
 
 import java.util.Map;
 
-import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
+import com.applitools.eyes.MatchLevel;
 import com.applitools.hackathon.pages.ExpensesPage;
 import com.applitools.hackathon.pages.LoginPage;
 import com.applitools.hackathon.pages.TransactionPage;
@@ -12,7 +12,6 @@ import com.applitools.hackathon.util.EyesManager;
 import com.qmetry.qaf.automation.core.ConfigurationManager;
 import com.qmetry.qaf.automation.testng.dataprovider.QAFDataProvider;
 import com.qmetry.qaf.automation.ui.WebDriverTestCase;
-import com.qmetry.qaf.automation.util.Validator;
 
 /*
  * Author: Mehul Kagathara
@@ -29,6 +28,7 @@ public class VisualAITests extends WebDriverTestCase {
 		LoginPage loginPage = new LoginPage();
 		loginPage.launchPage(null);
 		EyesManager eyesManager = new EyesManager();
+		eyesManager.setMatchLevel(MatchLevel.STRICT);
 		eyesManager.checkWindow(getDriver());
 	}
 
@@ -50,6 +50,7 @@ public class VisualAITests extends WebDriverTestCase {
 		loginPage.doLogin(testData.get("username"), testData.get("password"));
 
 		EyesManager eyesManager = new EyesManager();
+		eyesManager.setMatchLevel(MatchLevel.STRICT);
 		eyesManager.checkWindow(getDriver(),testData.get("recId"));
 	}
 
@@ -59,7 +60,7 @@ public class VisualAITests extends WebDriverTestCase {
 	 * verify that the column is in ascending order and that each row’s data stayed
 	 * in tact after the sorting.
 	 */
-	@Test(enabled = false, priority = 3)
+	@Test(enabled = true, priority = 3)
 	public void tableSortTest() {
 		LoginPage loginPage = new LoginPage();
 		loginPage.launchPage(null);
@@ -69,8 +70,11 @@ public class VisualAITests extends WebDriverTestCase {
 
 		TransactionPage transactionPage = new TransactionPage();
 		transactionPage.getRecentTransactions().getAmount().click();
-		Validator.verifyTrue(transactionPage.getRecentTransactions().isAmountAscending(),
-				"Amount column data is in ascending order!", "Amount column data is in ascending order!");
+		
+		EyesManager eyesManager = new EyesManager();
+		eyesManager.takeFullScreenshot(true);
+		eyesManager.setMatchLevel(MatchLevel.CONTENT);
+		eyesManager.checkWindow(getDriver());
 	}
 
 	/*
@@ -83,7 +87,7 @@ public class VisualAITests extends WebDriverTestCase {
 	 * should add the data for the year 2019. Verify that this data set is added for
 	 * the year 2019
 	 */
-	@Test(enabled = false, priority = 4)
+	@Test(enabled = true, priority = 4)
 	public void canvasChartTest() {
 		LoginPage loginPage = new LoginPage();
 		loginPage.launchPage(null);
@@ -93,19 +97,15 @@ public class VisualAITests extends WebDriverTestCase {
 
 		TransactionPage transactionPage = new TransactionPage();
 		transactionPage.getShowExpensesChart().click();
-
+		
+		EyesManager eyesManager = new EyesManager();
+		eyesManager.setMatchLevel(MatchLevel.STRICT);
+		
 		ExpensesPage expenses = new ExpensesPage();
-		expenses.getCanvas().verifyPresent();
-		// Validate that the bar chart and representing that data (number of bars and
-		// their heights).
-		// Cannot validate canvas in traditional selenium based automation
-		Validator.verifyFalse(true, "Cannot validate canvas chart in traditional selenium based automation", "Success");
+		eyesManager.checkWindow(getDriver());
+		
 		expenses.getNextYear().click();
-		expenses.getCanvas().verifyPresent();
-		// Validate that the bar chart and representing that data (number of bars and
-		// their heights).
-		// Cannot validate canvas in traditional selenium based automation
-		Validator.verifyFalse(true, "Cannot validate canvas chart in traditional selenium based automation", "Success");
+		eyesManager.checkWindow(getDriver());
 	}
 
 	/*
@@ -115,7 +115,7 @@ public class VisualAITests extends WebDriverTestCase {
 	 * any username and password. Once logged in, you should see two different
 	 * "Flash sale" gifs. Make sure both gifs exists.
 	 */
-	@Test(enabled = false, priority = 5)
+	@Test(enabled = true, priority = 5)
 	public void dynamicContentTest() {
 		LoginPage loginPage = new LoginPage();
 		getDriver().get(ConfigurationManager.getBundle().getString("env.url.showad"));
@@ -123,10 +123,9 @@ public class VisualAITests extends WebDriverTestCase {
 		loginPage.doLogin(ConfigurationManager.getBundle().getString("username"),
 				ConfigurationManager.getBundle().getString("password"));
 
-		TransactionPage transactionPage = new TransactionPage();
-		Validator.verifyTrue(transactionPage.getFlashSale1().isDisplayed(), "Flash Sale-1 image not display",
-				"Flash Sale-1 image is display");
-		Validator.verifyTrue(transactionPage.getFlashSale2().isDisplayed(), "Flash Sale-2 image not display",
-				"Flash Sale-2 image is display");
+		EyesManager eyesManager = new EyesManager();
+		eyesManager.setMatchLevel(MatchLevel.STRICT);
+		
+		eyesManager.checkWindow(getDriver());
 	}
 }

@@ -1,6 +1,10 @@
 package com.applitools.hackathon.util;
 
+import org.apache.commons.lang.StringUtils;
+
+import com.applitools.eyes.MatchLevel;
 import com.applitools.eyes.selenium.Eyes;
+import com.applitools.eyes.selenium.StitchMode;
 import com.qmetry.qaf.automation.core.ConfigurationManager;
 import com.qmetry.qaf.automation.ui.webdriver.QAFWebDriver;
 
@@ -17,14 +21,23 @@ public class EyesManager {
 	}
 
 	public void checkWindow(QAFWebDriver driver, String... testSufix) {
+		String testName = StringUtils.capitalize(ConfigurationManager.getBundle().getString("test_name"));
 		if (!eyes.getIsOpen()) {
 			if (testSufix.length > 0) {
-				eyes.open(driver, appName, ConfigurationManager.getBundle().getString("test_name") + (String) testSufix[0]);
+				eyes.open(driver, appName, testName + (String) testSufix[0]);
 			} else {
-				eyes.open(driver, appName, ConfigurationManager.getBundle().getString("test_name"));
+				eyes.open(driver, appName, testName);
 			}
 			eyes.checkWindow();
 			eyes.close();
 		}
+	}
+
+	public void takeFullScreenshot(boolean shouldForce) {
+		eyes.setForceFullPageScreenshot(shouldForce);
+		eyes.setStitchMode(StitchMode.CSS);
+	}
+	public void setMatchLevel(MatchLevel level) {
+		eyes.setMatchLevel(level);
 	}
 }

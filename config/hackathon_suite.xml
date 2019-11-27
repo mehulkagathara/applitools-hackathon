@@ -4,6 +4,7 @@
 		<listener
 			class-name="com.applitools.hackathon.util.EyesListener" />
 	</listeners>
+	
 	<test name="TraditionalTests - Version 1" enabled="false">
 		<parameter name="env.resources" value="resources/env1" />
 		<classes>
@@ -16,8 +17,14 @@
 			<class name="com.applitools.hackathon.tests.TraditionalTests"></class>
 		</classes>
 	</test>
-	<test name="VisualAITests - Version 1" enabled="true">
+	<test name="VisualAITests - Version 1" enabled="false">
 		<parameter name="env.resources" value="resources/env1" />
+		<classes>
+			<class name="com.applitools.hackathon.tests.VisualAITests"></class>
+		</classes>
+	</test>
+	<test name="VisualAITests - Version 2" enabled="true">
+		<parameter name="env.resources" value="resources/env2" />
 		<classes>
 			<class name="com.applitools.hackathon.tests.VisualAITests"></class>
 		</classes>
