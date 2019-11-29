@@ -13,9 +13,15 @@ import com.qmetry.qaf.automation.core.ConfigurationManager;
 import com.qmetry.qaf.automation.testng.dataprovider.QAFDataProvider;
 import com.qmetry.qaf.automation.ui.WebDriverTestCase;
 
+/**
+ * 
+ * @author mehul.kagathara
+ * @company Infostretch
+ */
 /*
- * Author: Mehul Kagathara
- * Company: Infostretch
+ * VisualAITests class which extends the QAF base class WebDriverTestCase to get
+ * all basic framework features. This test class is to demonstrate the
+ * Applitools Visual AI capabilities to simplify automation using AI.
  */
 public class VisualAITests extends WebDriverTestCase {
 	/*
@@ -27,8 +33,15 @@ public class VisualAITests extends WebDriverTestCase {
 	public void loginUIValidationTest() {
 		LoginPage loginPage = new LoginPage();
 		loginPage.launchPage(null);
+		/*
+		 * EyesManager to get common utility functions for Eyes.
+		 */
 		EyesManager eyesManager = new EyesManager(getDriver());
 		eyesManager.setMatchLevel(MatchLevel.STRICT);
+		/*
+		 * Validate the UI by simply calling checkWindow method instead of writting
+		 * locators and other selenium code.
+		 */
 		eyesManager.checkWindow();
 	}
 
@@ -46,11 +59,24 @@ public class VisualAITests extends WebDriverTestCase {
 	public void dataDrivenLoginTest(Map<String, String> testData) {
 		LoginPage loginPage = new LoginPage();
 		loginPage.launchPage(null);
-
+		/*
+		 * doLogin method will login with given username and password. data will come
+		 * from data provider and it will fetch from login.xml file. @QAFDataProvider is
+		 * framework feature to get the external data to test.
+		 */
 		loginPage.doLogin(testData.get("username"), testData.get("password"));
-
+		/*
+		 * EyesManager to get common utility functions for Eyes.
+		 */
 		EyesManager eyesManager = new EyesManager(getDriver());
 		eyesManager.setMatchLevel(MatchLevel.STRICT);
+		/*
+		 * Validate the UI by simply calling checkWindow method instead of writting
+		 * locators and other selenium code. Since this is data driven test, passing
+		 * optional argument to sufix iteration details and this will add to test name.
+		 * So in report user can easily see checkWindow result for each iteration of
+		 * test.
+		 */
 		eyesManager.checkWindow(testData.get("recId"));
 	}
 
@@ -64,15 +90,23 @@ public class VisualAITests extends WebDriverTestCase {
 	public void tableSortTest() {
 		LoginPage loginPage = new LoginPage();
 		loginPage.launchPage(null);
-
+		/*
+		 * Standard valid test data defined in resources/data/user.properties.
+		 */
 		loginPage.doLogin(ConfigurationManager.getBundle().getString("username"),
 				ConfigurationManager.getBundle().getString("password"));
 
 		TransactionPage transactionPage = new TransactionPage();
 		transactionPage.getRecentTransactions().getAmount().click();
-		
+		/*
+		 * EyesManager to get common utility functions for Eyes.
+		 */
 		EyesManager eyesManager = new EyesManager(getDriver());
 		eyesManager.setMatchLevel(MatchLevel.CONTENT);
+		/*
+		 * Validate the UI by simply calling checkWindow method instead of writting
+		 * locators and other selenium code.
+		 */
 		eyesManager.checkWindow();
 	}
 
@@ -90,21 +124,33 @@ public class VisualAITests extends WebDriverTestCase {
 	public void canvasChartTest() {
 		LoginPage loginPage = new LoginPage();
 		loginPage.launchPage(null);
-
+		/*
+		 * Standard valid test data defined in resources/data/user.properties.
+		 */
 		loginPage.doLogin(ConfigurationManager.getBundle().getString("username"),
 				ConfigurationManager.getBundle().getString("password"));
 
 		TransactionPage transactionPage = new TransactionPage();
 		transactionPage.getShowExpensesChart().click();
-		
+		/*
+		 * EyesManager to get common utility functions for Eyes.
+		 */
 		EyesManager eyesManager = new EyesManager(getDriver());
 		eyesManager.setMatchLevel(MatchLevel.STRICT);
-		
+
 		ExpensesPage expenses = new ExpensesPage();
+		/*
+		 * Validate the UI by simply calling checkWindow method instead of writting
+		 * locators and other selenium code. First it will check window for 2017-18 data
+		 * display in canvas. Passing optional checkWindow argument to append suffix to
+		 * test name. So, in applitools dashboard report it will show separate.
+		 */
 		eyesManager.checkWindow("(2017-18)");
-		
+
 		expenses.getNextYear().click();
-		
+		/*
+		 * for 2019-19 data
+		 */
 		eyesManager.checkWindow("(2018-19)");
 	}
 
@@ -118,14 +164,25 @@ public class VisualAITests extends WebDriverTestCase {
 	@Test(enabled = true, priority = 5)
 	public void dynamicContentTest() {
 		LoginPage loginPage = new LoginPage();
+		/*
+		 * Navigate to showad url and url will fetch from the respective enviornment
+		 * properties file. example, resources/env1 or resources/env2.
+		 */
 		getDriver().get(ConfigurationManager.getBundle().getString("env.url.showad"));
-
+		/*
+		 * Standard valid test data defined in resources/data/user.properties.
+		 */
 		loginPage.doLogin(ConfigurationManager.getBundle().getString("username"),
 				ConfigurationManager.getBundle().getString("password"));
-
+		/*
+		 * EyesManager to get common utility functions for Eyes.
+		 */
 		EyesManager eyesManager = new EyesManager(getDriver());
 		eyesManager.setMatchLevel(MatchLevel.STRICT);
-		
+		/*
+		 * Validate the UI by simply calling checkWindow method instead of writting
+		 * locators and other selenium code.
+		 */
 		eyesManager.checkWindow();
 	}
 }

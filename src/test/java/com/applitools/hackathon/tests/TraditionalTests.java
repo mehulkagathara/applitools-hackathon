@@ -13,9 +13,15 @@ import com.qmetry.qaf.automation.testng.dataprovider.QAFDataProvider;
 import com.qmetry.qaf.automation.ui.WebDriverTestCase;
 import com.qmetry.qaf.automation.util.Validator;
 
+/**
+ * 
+ * @author mehul.kagathara
+ * @company Infostretch
+ */
 /*
- * Author: Mehul Kagathara
- * Company: Infostretch
+ * TraditionalTests class which extends the QAF base class WebDriverTestCase to
+ * get all basic framework features. This test class is to demonstrate the
+ * traditional way to automate the web application without Applitools Visual AI.
  */
 public class TraditionalTests extends WebDriverTestCase {
 	/*
@@ -27,7 +33,9 @@ public class TraditionalTests extends WebDriverTestCase {
 	public void loginUIValidationTest() {
 		LoginPage loginPage = new LoginPage();
 		loginPage.launchPage(null);
-		
+		/*
+		 * Validate all UI aspects of the Login Page
+		 */
 		loginPage.verifyUIElements();
 	}
 
@@ -45,7 +53,11 @@ public class TraditionalTests extends WebDriverTestCase {
 	public void dataDrivenLoginTest(Map<String, String> testData) {
 		LoginPage loginPage = new LoginPage();
 		loginPage.launchPage(null);
-
+		/*
+		 * doLogin method will login with given username and password. data will come
+		 * from data provider and it will fetch from login.xml file. @QAFDataProvider is
+		 * framework feature to get the external data to test.
+		 */
 		loginPage.doLogin(testData.get("username"), testData.get("password"));
 
 		if (testData.get("isValid").equalsIgnoreCase("invalid")) {// invalid check
@@ -65,12 +77,15 @@ public class TraditionalTests extends WebDriverTestCase {
 	public void tableSortTest() {
 		LoginPage loginPage = new LoginPage();
 		loginPage.launchPage(null);
-
+		/*
+		 * Standard valid test data defined in resources/data/user.properties.
+		 */
 		loginPage.doLogin(ConfigurationManager.getBundle().getString("username"),
 				ConfigurationManager.getBundle().getString("password"));
 
 		TransactionPage transactionPage = new TransactionPage();
-		transactionPage.getRecentTransactions().getAmount().click();
+		transactionPage.getRecentTransactions().getAmount().click();// click to sort column data
+
 		Validator.verifyTrue(transactionPage.getRecentTransactions().isAmountAscending(),
 				"Amount column data is in ascending order!", "Amount column data is in ascending order!");
 	}
@@ -89,7 +104,9 @@ public class TraditionalTests extends WebDriverTestCase {
 	public void canvasChartTest() {
 		LoginPage loginPage = new LoginPage();
 		loginPage.launchPage(null);
-
+		/*
+		 * Standard valid test data defined in resources/data/user.properties.
+		 */
 		loginPage.doLogin(ConfigurationManager.getBundle().getString("username"),
 				ConfigurationManager.getBundle().getString("password"));
 
@@ -120,8 +137,14 @@ public class TraditionalTests extends WebDriverTestCase {
 	@Test(enabled = true, priority = 5)
 	public void dynamicContentTest() {
 		LoginPage loginPage = new LoginPage();
+		/*
+		 * Navigate to showad url and url will fetch from the respective enviornment
+		 * properties file. example, resources/env1 or resources/env2.
+		 */
 		getDriver().get(ConfigurationManager.getBundle().getString("env.url.showad"));
-
+		/*
+		 * Standard valid test data defined in resources/data/user.properties.
+		 */
 		loginPage.doLogin(ConfigurationManager.getBundle().getString("username"),
 				ConfigurationManager.getBundle().getString("password"));
 
