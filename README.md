@@ -1,3 +1,7 @@
 # Applitools Hackathon
 
-*Introduction
+* Introduction
+
+* Instructions
+
+* How to build project
