@@ -1,1 +1,3 @@
 # Applitools Hackathon
+
+*Introduction
