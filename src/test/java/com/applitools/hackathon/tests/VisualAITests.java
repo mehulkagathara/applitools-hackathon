@@ -27,9 +27,9 @@ public class VisualAITests extends WebDriverTestCase {
 	public void loginUIValidationTest() {
 		LoginPage loginPage = new LoginPage();
 		loginPage.launchPage(null);
-		EyesManager eyesManager = new EyesManager();
+		EyesManager eyesManager = new EyesManager(getDriver());
 		eyesManager.setMatchLevel(MatchLevel.STRICT);
-		eyesManager.checkWindow(getDriver());
+		eyesManager.checkWindow();
 	}
 
 	/*
@@ -49,9 +49,9 @@ public class VisualAITests extends WebDriverTestCase {
 
 		loginPage.doLogin(testData.get("username"), testData.get("password"));
 
-		EyesManager eyesManager = new EyesManager();
+		EyesManager eyesManager = new EyesManager(getDriver());
 		eyesManager.setMatchLevel(MatchLevel.STRICT);
-		eyesManager.checkWindow(getDriver(),testData.get("recId"));
+		eyesManager.checkWindow(testData.get("recId"));
 	}
 
 	/*
@@ -71,10 +71,9 @@ public class VisualAITests extends WebDriverTestCase {
 		TransactionPage transactionPage = new TransactionPage();
 		transactionPage.getRecentTransactions().getAmount().click();
 		
-		EyesManager eyesManager = new EyesManager();
-		eyesManager.takeFullScreenshot(true);
+		EyesManager eyesManager = new EyesManager(getDriver());
 		eyesManager.setMatchLevel(MatchLevel.CONTENT);
-		eyesManager.checkWindow(getDriver());
+		eyesManager.checkWindow();
 	}
 
 	/*
@@ -98,14 +97,15 @@ public class VisualAITests extends WebDriverTestCase {
 		TransactionPage transactionPage = new TransactionPage();
 		transactionPage.getShowExpensesChart().click();
 		
-		EyesManager eyesManager = new EyesManager();
+		EyesManager eyesManager = new EyesManager(getDriver());
 		eyesManager.setMatchLevel(MatchLevel.STRICT);
 		
 		ExpensesPage expenses = new ExpensesPage();
-		eyesManager.checkWindow(getDriver());
+		eyesManager.checkWindow("(2017-18)");
 		
 		expenses.getNextYear().click();
-		eyesManager.checkWindow(getDriver());
+		
+		eyesManager.checkWindow("(2018-19)");
 	}
 
 	/*
@@ -123,9 +123,9 @@ public class VisualAITests extends WebDriverTestCase {
 		loginPage.doLogin(ConfigurationManager.getBundle().getString("username"),
 				ConfigurationManager.getBundle().getString("password"));
 
-		EyesManager eyesManager = new EyesManager();
+		EyesManager eyesManager = new EyesManager(getDriver());
 		eyesManager.setMatchLevel(MatchLevel.STRICT);
 		
-		eyesManager.checkWindow(getDriver());
+		eyesManager.checkWindow();
 	}
 }

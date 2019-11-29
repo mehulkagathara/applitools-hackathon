@@ -8,19 +8,33 @@ import com.applitools.eyes.selenium.StitchMode;
 import com.qmetry.qaf.automation.core.ConfigurationManager;
 import com.qmetry.qaf.automation.ui.webdriver.QAFWebDriver;
 
+/**
+ * 
+ * @author mehul.kagathara
+ * @company Infostretch
+ */
 /*
- * Author: Mehul Kagathara
- * Company: Infostretch
+ * EyesManager class to perform common Eyes operations like checkWindows etc.
+ * This will take WebDriver object in argument to initialize the class.
  */
 public class EyesManager {
 	private Eyes eyes;
 	private final String appName = "ACME Demo";
+	private QAFWebDriver driver;
 
-	public EyesManager() {
+	/*
+	 * Contructor will take WebDriver to initialize Eyes object.
+	 */
+	public EyesManager(QAFWebDriver driver) {
 		this.eyes = (Eyes) ConfigurationManager.getBundle().getObject("Eyes");
+		this.driver = driver;
 	}
 
-	public void checkWindow(QAFWebDriver driver, String... testSufix) {
+	/*
+	 * checkWindow method to check the windows using Visual AI and also take suffix
+	 * as argument to show appropriate test name in Applitools dashboard.
+	 */
+	public void checkWindow(String... testSufix) {
 		String testName = StringUtils.capitalize(ConfigurationManager.getBundle().getString("test_name"));
 		if (!eyes.getIsOpen()) {
 			if (testSufix.length > 0) {
@@ -33,10 +47,17 @@ public class EyesManager {
 		}
 	}
 
-	public void takeFullScreenshot(boolean shouldForce) {
+	/*
+	 * setTakeFullScreenshot - boolean method to take full page screenshot
+	 */
+	public void setTakeFullScreenshot(boolean shouldForce) {
 		eyes.setForceFullPageScreenshot(shouldForce);
 		eyes.setStitchMode(StitchMode.CSS);
 	}
+
+	/*
+	 * setMatchLevel method to set match level
+	 */
 	public void setMatchLevel(MatchLevel level) {
 		eyes.setMatchLevel(level);
 	}
