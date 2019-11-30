@@ -42,3 +42,8 @@ This is for reporting and traditional reports can be seen by `dashboard.htm` fil
 * `com.applitools.hackathon.comp` - created a component to handle table operations
 * `com.applitools.hackathon.pages` - POM pages to handle page specific operations
 * `com.applitools.hackathon.util` - created listener and useful classes for Eyes
+
+`src/test/java` package contains tests to validate application. There is one main sub package
+* `com.applitools.hackathon.tests` - this package contains two Java files
+** `TraditionalTests.java` - to demonstrate the normal way to do functional automated validation.
+** `VisualAITests.java` - to demonstrate the AI based automation using Applitools Visual AI capabilities.

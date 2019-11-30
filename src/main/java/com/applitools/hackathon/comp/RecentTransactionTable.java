@@ -1,6 +1,8 @@
 package com.applitools.hackathon.comp;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import com.qmetry.qaf.automation.ui.annotations.FindBy;
@@ -85,15 +87,22 @@ public class RecentTransactionTable extends QAFWebComponent {
 	 */
 	public boolean isAmountAscending() {
 		/*
-		 * Sorting logic will come here
+		 * Sorting logic will come here, below logic can be optimized.
 		 */
 		List<Row> rows = getTransactionRow();
-		List<Integer> lstAmt = new ArrayList<>();
-		
+		List<String> lstAmt = new ArrayList<>();
+		List<String> lstOrg = new ArrayList<>();
+
 		for (Row row : rows) {
-			//lstAmt.add(row.getAmount().getText().)
+			lstAmt.add(row.getAmount().getText());
+			lstOrg.add(row.getAmount().getText());
 		}
-		return true;
+		Collections.sort(lstAmt);
+		if (lstAmt.equals(lstOrg)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/*
