@@ -1,5 +1,6 @@
 package com.applitools.hackathon.comp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.qmetry.qaf.automation.ui.annotations.FindBy;
@@ -86,10 +87,12 @@ public class RecentTransactionTable extends QAFWebComponent {
 		/*
 		 * Sorting logic will come here
 		 */
-		// List<Row> rows = getTransactionRow();
-		// for (Row row : rows) {
-		//
-		// }
+		List<Row> rows = getTransactionRow();
+		List<Integer> lstAmt = new ArrayList<>();
+		
+		for (Row row : rows) {
+			//lstAmt.add(row.getAmount().getText().)
+		}
 		return true;
 	}
 

@@ -8,10 +8,10 @@ import com.applitools.eyes.MatchLevel;
 import com.applitools.hackathon.pages.ExpensesPage;
 import com.applitools.hackathon.pages.LoginPage;
 import com.applitools.hackathon.pages.TransactionPage;
-import com.applitools.hackathon.util.EyesManager;
+import com.applitools.hackathon.util.EyesBaseTestCase;
 import com.qmetry.qaf.automation.core.ConfigurationManager;
+import com.qmetry.qaf.automation.core.QAFTestBase;
 import com.qmetry.qaf.automation.testng.dataprovider.QAFDataProvider;
-import com.qmetry.qaf.automation.ui.WebDriverTestCase;
 
 /**
  * 
@@ -19,11 +19,11 @@ import com.qmetry.qaf.automation.ui.WebDriverTestCase;
  * @company Infostretch
  */
 /*
- * VisualAITests class which extends the QAF base class WebDriverTestCase to get
- * all basic framework features. This test class is to demonstrate the
+ * VisualAITests class which extends the QAF base class EyesBaseTestCase to get
+ * all basic framework & Eyes features. This test class is to demonstrate the
  * Applitools Visual AI capabilities to simplify automation using AI.
  */
-public class VisualAITests extends WebDriverTestCase {
+public class VisualAITests extends EyesBaseTestCase {
 	/*
 	 * Open the login page and write assertions to ensure everything looks OK on
 	 * that page. i.e. add assertions to ensure all the fields, labels and all other
@@ -34,15 +34,16 @@ public class VisualAITests extends WebDriverTestCase {
 		LoginPage loginPage = new LoginPage();
 		loginPage.launchPage(null);
 		/*
-		 * EyesManager to get common utility functions for Eyes.
+		 * By default MatchLevel is STRICT only, to just demonstrate purpose how to set
+		 * new MatchLevel at test level adding this line.In case, if you would like to
+		 * set different level.
 		 */
-		EyesManager eyesManager = new EyesManager(getDriver());
-		eyesManager.setMatchLevel(MatchLevel.STRICT);
+		getEyesManager().setMatchLevel(MatchLevel.STRICT);
 		/*
 		 * Validate the UI by simply calling checkWindow method instead of writting
 		 * locators and other selenium code.
 		 */
-		eyesManager.checkWindow();
+		getEyesManager().checkWindow();
 	}
 
 	/*
@@ -66,10 +67,11 @@ public class VisualAITests extends WebDriverTestCase {
 		 */
 		loginPage.doLogin(testData.get("username"), testData.get("password"));
 		/*
-		 * EyesManager to get common utility functions for Eyes.
+		 * By default MatchLevel is STRICT only, to just demonstrate purpose how to set
+		 * new MatchLevel at test level adding this line.In case, if you would like to
+		 * set different level.
 		 */
-		EyesManager eyesManager = new EyesManager(getDriver());
-		eyesManager.setMatchLevel(MatchLevel.STRICT);
+		getEyesManager().setMatchLevel(MatchLevel.STRICT);
 		/*
 		 * Validate the UI by simply calling checkWindow method instead of writting
 		 * locators and other selenium code. Since this is data driven test, passing
@@ -77,7 +79,7 @@ public class VisualAITests extends WebDriverTestCase {
 		 * So in report user can easily see checkWindow result for each iteration of
 		 * test.
 		 */
-		eyesManager.checkWindow(testData.get("recId"));
+		getEyesManager().checkWindow(testData.get("recId"));
 	}
 
 	/*
@@ -97,17 +99,20 @@ public class VisualAITests extends WebDriverTestCase {
 				ConfigurationManager.getBundle().getString("password"));
 
 		TransactionPage transactionPage = new TransactionPage();
-		transactionPage.getRecentTransactions().getAmount().click();
 		/*
-		 * EyesManager to get common utility functions for Eyes.
+		 * Clicking on Amount column header to get data sort based on amount.
 		 */
-		EyesManager eyesManager = new EyesManager(getDriver());
-		eyesManager.setMatchLevel(MatchLevel.CONTENT);
+		transactionPage.getRecentTransactions().getAmount().click();
+		QAFTestBase.pause(2000);
+		/*
+		 * Set Content level to validate the table content
+		 */
+		getEyesManager().setMatchLevel(MatchLevel.CONTENT);
 		/*
 		 * Validate the UI by simply calling checkWindow method instead of writting
 		 * locators and other selenium code.
 		 */
-		eyesManager.checkWindow();
+		getEyesManager().checkWindow();
 	}
 
 	/*
@@ -133,10 +138,11 @@ public class VisualAITests extends WebDriverTestCase {
 		TransactionPage transactionPage = new TransactionPage();
 		transactionPage.getShowExpensesChart().click();
 		/*
-		 * EyesManager to get common utility functions for Eyes.
+		 * By default MatchLevel is STRICT only, to just demonstrate purpose how to set
+		 * new MatchLevel at test level adding this line.In case, if you would like to
+		 * set different level.
 		 */
-		EyesManager eyesManager = new EyesManager(getDriver());
-		eyesManager.setMatchLevel(MatchLevel.STRICT);
+		getEyesManager().setMatchLevel(MatchLevel.STRICT);
 
 		ExpensesPage expenses = new ExpensesPage();
 		/*
@@ -145,13 +151,13 @@ public class VisualAITests extends WebDriverTestCase {
 		 * display in canvas. Passing optional checkWindow argument to append suffix to
 		 * test name. So, in applitools dashboard report it will show separate.
 		 */
-		eyesManager.checkWindow("(2017-18)");
+		getEyesManager().checkWindow("(2017-18)");
 
 		expenses.getNextYear().click();
 		/*
 		 * for 2019-19 data
 		 */
-		eyesManager.checkWindow("(2018-19)");
+		getEyesManager().checkWindow("(2018-19)");
 	}
 
 	/*
@@ -175,14 +181,15 @@ public class VisualAITests extends WebDriverTestCase {
 		loginPage.doLogin(ConfigurationManager.getBundle().getString("username"),
 				ConfigurationManager.getBundle().getString("password"));
 		/*
-		 * EyesManager to get common utility functions for Eyes.
+		 * By default MatchLevel is STRICT only, to just demonstrate purpose how to set
+		 * new MatchLevel at test level adding this line.In case, if you would like to
+		 * set different level.
 		 */
-		EyesManager eyesManager = new EyesManager(getDriver());
-		eyesManager.setMatchLevel(MatchLevel.STRICT);
+		getEyesManager().setMatchLevel(MatchLevel.STRICT);
 		/*
 		 * Validate the UI by simply calling checkWindow method instead of writting
 		 * locators and other selenium code.
 		 */
-		eyesManager.checkWindow();
+		getEyesManager().checkWindow();
 	}
 }
