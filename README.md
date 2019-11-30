@@ -16,6 +16,6 @@ Before running tests, please make sure your resolved project dependencies. After
 
 #### Project Structure
 #### resources folder
-This folder is key holder to keep all properties, test data & driver configurations.
-{:.note .note--danger}
-Set chrome driver executable path to `webdriver.chrome.driver` properties before execution. If you want to execute with other browsers please change `driver.name` properties.
+`application.properties` - This file is key holder to keep all driver related properties & configurations. Set chrome driver executable path to `webdriver.chrome.driver` properties before execution (by default set to my local path). If you want to execute with other browsers please change `driver.name` properties.
+
+`applitools.properties` - This
