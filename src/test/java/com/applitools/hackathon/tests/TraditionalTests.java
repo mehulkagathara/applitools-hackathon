@@ -87,7 +87,7 @@ public class TraditionalTests extends WebDriverTestCase {
 		transactionPage.getRecentTransactions().getAmount().click();// click to sort column data
 
 		Validator.verifyTrue(transactionPage.getRecentTransactions().isAmountAscending(),
-				"Amount column data is in ascending order!", "Amount column data is in ascending order!");
+				"Amount column data is not in ascending order!", "Amount column data is in ascending order!");
 	}
 
 	/*
