@@ -41,19 +41,19 @@ This automation framework has below core components which helps to drive the aut
 * **Reporting** - this component is useful to generate the execution report by collecting selenium & appium commands log.
 ### Folder Structure
 * **`config`** - folder consists all TestNG run configuration xml files in which user can specify what to run. User can also override the any of the properties from the configuration file as well through Parameter.
-* `resources` - under this folder there are two sub folders & application.properties file.
-    * `locators` - folder consists all application pages locators in separate individual page wise .properties file. A locator can be defined in key-value pair and through out implementation we can use key to refer the elements. So if tomorrow there will be any change in locator we just need to update the properties file and no changes will be required at implementation level. 
-    * `testdata` - test data can be provided in .xml format and to consume the data at step level, user just need to provide the xml key to get the value. 
-    * `application.properties` - consists all global application & driver related properties. like AUT url and desire capabilities etc.
-* `scenarios` -
-* `src` -
-    * `main/java`
-        * `com.infostretch.hs`
-    * `test/java`
-        * `com.infostretch.hs.components`
-        * `com.infostretch.hs.steps`
-* `test-results`
-* `dashboard.htm`
+* **`resources`** - under this folder there are two sub folders & application.properties file.
+    * **`locators`** - folder consists all application pages locators in separate individual page wise .properties file. A locator can be defined in key-value pair and through out implementation we can use key to refer the elements. So if tomorrow there will be any change in locator we just need to update the properties file and no changes will be required at implementation level. 
+    * **`testdata`** - test data can be provided in .xml format and to consume the data at step level, user just need to provide the xml key to get the value. 
+    * **`application.properties`** - consists all global application & driver related properties. like AUT url and desire capabilities etc.
+* **`scenarios`** -
+* **`src`** -
+    * **`main/java`**
+        * **`com.infostretch.hs`**
+    * **`test/java`**
+        * **`com.infostretch.hs.components`**
+        * **`com.infostretch.hs.steps`**
+* **`test-results`**
+* **`dashboard.htm`**
 ## Reporting
 ## Headspin Integration
 ## CI Integration
