@@ -1,7 +1,7 @@
 ### Overview
 This is Maven based Java project to demonstrate the Applitools Visual AI capabilities over traditional automation approach. The implementation is using some of the [QAF](https://github.com/qmetry/qaf) open source framework features and I am one of the key contributor to this open source selenium based automation framework (it is available under MIT license).
 
-![Example Diagram](https://app.diagrams.net/?lightbox=1&target=blank&highlight=0000ff&edit=_blank&layers=1&nav=1&title=framework.png#RjZJNb4QgEIZ%2FDccmKt2tvWrtx6G9eGhvGyKzQgJiWKzaX1%2Bsgx%2FZbNILgeedGYaXITTXw4tlrXg3HBRJIj4Q%2BkSS5PH%2B6NcJjDM4pAhqK%2FmM4hWU8gcQRkg7yeGyC3TGKCfbPaxM00DldoxZa%2Fp92Nmo%2Fa0tq%2BEKlBVT1%2FRTcidmmh6ilb%2BCrEW4OY5Q0SwEI7gIxk2%2FQbQgNLfGuHmnhxzU5F3wZc57vqEujVlo3H8SHqIiPqX0K4tkcy7U28dJZ3dY5ZupDh%2BMzboxOGBN13CYisSEZr2QDsqWVZPa%2By%2F3TDitUMZyYB0MN%2FuMl9f7qQGjwdnRh2BCin7hwBzx2K%2Fux8FSsXE%2BxDH88HopvHriN2hLOK72%2F2mbGabFLw%3D%3D)
+![Example Diagram](https://github.com/mehulkagathara/applitools-hackathon/blob/master/dashboard/images/info_stretch_logo.png)
 
 ### Setup
 
